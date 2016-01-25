@@ -1,0 +1,109 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Capes by Lelander: Discreet Portfolio Sharing</title>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.css">
+    <link rel="stylesheet" href="{% static './assets/app.css' %}"/>
+</head>
+
+<body ng-app="capes" layout="row" ng-controller="ClientController as cl" ng-cloak >
+
+    <!--SIDENAV -->
+    <!--SIDENAV -->
+    <!--SIDENAV -->
+
+    <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+                md-component-id="left"
+                md-is-locked-open="$mdMedia('gt-sm')"
+                hide-lt-sm>
+        <md-content>
+            <md-tabs md-stretch-tabs="always" md-dynamic-height md-border-bottom md-no-disconnect md-selected="cl.selectedIndex">
+
+                <md-tab ng-click="$mdBottomSheet.hide()">
+                    <md-tab-label>Work</md-tab-label>
+                    <md-tab-body class="md-padding">
+                        {% if status == 0 %}
+                        <md-list style="margin-top:.5em;">
+                            <md-list-item ng-repeat="it in cl.work" class="repeated-item">
+                                <md-button ng-click="cl.selectWork(it)" ng-class="{'selected' : it === cl.selected_work }">
+                                    <md-icon md-svg-icon="{% verbatim %}{{it.avatar}}{% endverbatim %}" class="avatar"></md-icon>
+                                    {% verbatim %}{{it.name}}{% endverbatim %}
+                                </md-button>
+                            </md-list-item>
+                        </md-list>
+                        {% endif %}
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </md-sidenav>
+
+    <!-- MAIN CONTENT WINDOW -->
+    <!-- MAIN CONTENT WINDOW -->
+    <!-- MAIN CONTENT WINDOW -->
+
+    <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+
+        <md-toolbar layout="row" class="md-whiteframe-z1">
+            <md-button class="menu" hide-gt-sm ng-click="cl.toggleClientList()" aria-label="Show Client List">
+                <md-icon md-svg-icon="menu"></md-icon>
+            </md-button>
+            <h1>Capes: Discrete Portfolio Sharing</h1>
+        </md-toolbar>
+
+        {% if status == 0 %}
+        <md-content flex id="content">
+            <div>
+                <h1 style="margin-bottom:0;">{% verbatim %}{{cl.selected_work.name}}{% endverbatim %}</h1>
+                <p style="margin-bottom:1.5em;">
+                    <ng-md-icon class="lower" icon="description" style="fill:saddlebrown;"></ng-md-icon>
+                    {% verbatim %}{{cl.selected_work.notes}}{% endverbatim %}
+                </p>
+                <img style="margin-top:1px; margin-bottom:3px;" ng-src="{% verbatim %}{{cl.selected_work.image}}{% endverbatim %}">
+            </div>
+        </md-content>
+        {% endif %}
+
+        {% if status == 1 %}
+        <md-content flex id="content">
+            <h1 style="margin-bottom:0;">Whoops</h1>
+            <p>This link doesn't seem to exist. Do you need to contact Lelander?</p>
+        </md-content>
+        {% endif %}
+
+        {% if status == 2 %}
+        <md-content flex id="content">
+            <h1 style="margin-bottom:0;">Whoops</h1>
+            <p>This link is expired. Would you like to request the link be reactivated?</p>
+        </md-content>
+        {% endif %}
+    </div>
+
+    <!-- INCLUDES -->
+    <!-- INCLUDES -->
+    <!-- INCLUDES -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-messages.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/lodash/2.1.0/lodash.compat.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/9.0.9/ng-file-upload.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/9.0.9/ng-file-upload-shim.min.js"></script>
+
+    <script src="{% static './src/clients/Clients.js' %}"></script>
+    <script src="{% static './src/clients/ClientController.js' %}"></script>
+    <script src="{% static './src/capes.js' %}"></script>
+</body>
+</html>

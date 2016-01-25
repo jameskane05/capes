@@ -1,0 +1,49 @@
+<md-bottom-sheet style="min-height:570px;" aria-label="Email client" ng-cloak>
+    <form name="emailClientForm">
+        <md-toolbar layout="row" layout-align="space-between end" class="md-toolbar-tools">
+                <h2>Email {{selected.name}}</h2>
+                <div>
+                    <md-button class="md-icon-button" ng-click="emailClient(emailData)">
+                        <md-tooltip>Email Client</md-tooltip>
+                        <ng-md-icon icon="check_circle" style="fill:rgba(255, 255, 255, 0.870588);" aria-label="Email client"></ng-md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="hide()">
+                        <md-tooltip>Cancel</md-tooltip>
+                        <ng-md-icon icon="cancel" style="fill:rgba(255, 255, 255, 0.870588);" aria-label="Close dialog"></ng-md-icon>
+                    </md-button>
+                </div>
+        </md-toolbar>
+
+        <md-card style="margin-bottom:0;">
+            <md-card-content layout="column">
+                <div style="font-size:1.1em;" layout="row" layout-align="space-around end">
+                    <div class="email-info" flex>
+                        <table>
+                            <tr><td style="padding-right:1em;">From:</td><td><em>jp@lelander.com</em></td></tr>
+                            <tr><td style="padding-bottom:1em;">To:</td><td style="padding-bottom:1em;"><em>{{ selected.email }}</em></td></tr>
+                        </table>
+                    </div>
+                    <div flex>
+                        <md-input-container class="email-subject">
+                            <label style="font-size:1.3em;position:relative;top:6px;">Subject:</label>
+                            <input name="email_subject" ng-model="emailData.email_subject" columns="2" />
+                        </md-input-container>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="md-title">Dear {{selected.name}},</h1>
+                    <p>Someone at <a href="http://lelander.com">Lelander</a> wants to share our work with you. We like to be discreet with this kind of thing, so we've created a custom link just for you. Heads up - this material is time-sensitive and won't be available after {{ selected.exp_date | date:'MM/dd/yyyy' }}:</p>
+                    <a href="https://capes.lelander.com/work/{{selected.link}}">http://capes.lelander.com/work/{{selected.link}}</a>
+                    <p ng-hide="emailClientForm.custom_email_text.$pristine">Here's a personalized message from your Lelander contact:</p>
+                    <md-input-container flex>
+                        <label>Personalize your email here</label>
+                        <textarea name="custom_email_text" ng-model="emailData.custom_email_text" columns="1"></textarea>
+                    </md-input-container>
+                    <p>We hope you like what you see! Feel free to email or call with any questions.</p>
+                    <p style="margin-bottom:0;">Warm regards,</p>
+                    <h3 style="margin-top:0;">The Lelander Team</h3>
+                </div>
+            </md-card-content>
+        </md-card>
+    </form>
+</md-bottom-sheet>

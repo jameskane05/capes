@@ -1,0 +1,37 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div style="width: 180px; display: block; margin: 1em auto;">
+        <img src="{% static './img/lelander_logo.png' %}" style="margin-top:4em; margin-bottom:1.15em; width:170px;"><br>
+        <img src="{% static './img/slack-imgs.gif' %}" style="width:170px;margin-bottom:.15em;"><br><br>
+        <form action="/api-auth/login/" method="POST">
+            {%  csrf_token  %}
+            <input name="username" type="text" placeholder="Username" style="margin-top: 5px; margin-bottom:15px; border-top:0; border-left:0; border-right:0;"><br>
+            {% if form.username.errors %}
+                    <p style="color:red;font-size:.75em;margin-top:0;position:relative;bottom:11px;" class="text-error">
+                      {{ form.username.errors|striptags }}
+                    </p>
+                  {% endif %}
+            <input name="password" type="password" placeholder="Password" style="margin-bottom:15px; border-top:0; border-left:0; border-right:0;"><br>
+            {% if form.password.errors %}
+                    <p style="color:red;font-size:.75em;margin-top:0;position:relative;bottom:11px;" class="text-error">
+                      {{ form.password.errors|striptags }}
+                    </p>
+                  {% endif %}
+            <button type="submit" style="display:block;margin:.5em auto 1.5em auto; text-decoration: wavy; margin-top: 15px; background-color:white; border:0px outset;">Log In</button>
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                  <div style="color:red;font-size:.75em;" class="well well-small text-error" style="border: none">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>

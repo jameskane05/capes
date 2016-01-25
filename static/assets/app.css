@@ -1,0 +1,338 @@
+html, body {
+  font-family: 'Roboto', sans-serif;
+  font-size:14px;
+  height:100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Toolbar area */
+
+.menu {
+  background-color: transparent;
+  border: none;
+  height: 38px;
+  margin: 16px;
+  width: 36px;
+}
+
+md-toolbar h1 {
+  margin: auto;
+}
+
+/* Sidenav area */
+
+md-list .md-button {
+  color: inherit;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+}
+  md-list .md-button.selected {
+    color: #03a9f4;
+  }
+
+  md-sidenav  md-list {
+    padding: 0px 0px 8px 0px;
+  }
+
+.md-title {
+  margin-top:1em;
+}
+
+/* Primary content area */
+
+#content {
+  overflow: hidden;
+}
+
+#content  {
+  padding-left: 35px;
+  padding-right: 40px;
+  padding-top: 10px;
+}
+
+#content .md-button.contact {
+  background-color: transparent;
+  border: none;
+  width: 150px;
+  height: 60px;
+  margin: 8px auto 16px 0;
+  position: absolute;
+  top: 10px;
+  right: 40px;
+}
+
+button.contact.md-button {
+  width: 100px;
+}
+
+#content md-icon.avatar {
+  margin-top: 5px;
+}
+
+#content .md-button.contact > md-icon {
+  fill:black;
+  width:30px;
+  height:30px;
+}
+
+md-button.menuBtn > md-icon {
+  fill:white;
+  width:24px;
+  height:24px;
+}
+
+#content .md-button.contact:active > md-icon {
+  background-color: #dadada;
+  border-radius: 75%;
+  padding:4px;
+  transition: all 100ms ease-out 30ms;
+}
+
+#content img {
+  display: block;
+  height: auto;
+  max-width: 500px;
+}
+
+.glyphicon-plus {
+color: green;
+}
+
+/* Utils */
+
+.content-wrapper {
+  position: relative;
+}
+
+/* Typography support coming in 0.8.0 */
+
+md-toolbar h1 {
+  font-size: 1.250em;
+  font-weight: 400;
+}
+
+.avatar {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0px;
+  vertical-align: middle;
+  zoom:0.70;
+  transform: translateZ(0);
+  -webkit-transform: scale(0.70);
+  -moz-transform:scale(0.70);
+}
+
+
+md-bottom-sheet {
+  padding: 0;
+}
+
+span.name {
+  font-weight: bold;
+  font-size:1.1em;
+  padding-left:5px;
+}
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+.dialogdemoBasicUsage .debt-be-gone {
+  font-weight: bold;
+  color: blue;
+  text-decoration: underline; }
+.dialogdemoBasicUsage .footer {
+  width: 100%;
+  text-align: center;
+  margin-left: 20px; }
+
+.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+  font-size: 0.8em;
+  margin-top: 50px; }
+
+.md-button.md-icon-button {
+  line-height: 0px;
+}
+
+
+md-card md-card-content {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.create-client {
+  margin-right: 1.3em;
+  margin-bottom: 0.65em;
+}
+
+label {
+  margin-bottom:5px;
+}
+
+md-dialog md-dialog-content {
+  margin-bottom:0em;
+  padding-bottom: 1em;
+  padding-top: .75em;
+}
+
+.notes {
+  padding-top: 0;
+}
+
+.create-row {
+  margin-bottom:1.75em;
+}
+
+md-input-container.email-subject {
+  padding-bottom:.75em;
+}
+
+
+.lower svg {
+    position: relative;
+    top: 7px;
+}
+
+.setting svg {
+      position: relative;
+    right: 1px;
+  top:1px;
+}
+
+.logout svg {
+        position: relative;
+  top: 1px;
+  left:2px;
+}
+
+
+
+div.md-datepicker-input-container {
+  margin-left: 4px;
+
+}
+
+
+md-datepicker.expDateSetter div.md-datepicker-input-container input {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 1);
+}
+
+md-datepicker.expDateSetter button.md-datepicker-button {
+  height: 24px;
+  width: 24px;
+  margin: 0;
+}
+md-datepicker.expDateSetter button.md-datepicker-button svg {
+fill:saddlebrown;
+}
+
+a {
+  color:black;
+}
+
+/* Code for tabs to be the same height as the primary menu bar */
+md-tabs, md-tab, md-tabs-canvas, md-tab-item, md-pagination-wrapper {
+  min-height: 63px;
+}
+md-tabs-canvas md-pagination-wrapper {
+  width:152px;
+}
+md-tab-item {
+  min-width:152px;
+  line-height:0;
+  vertical-align: bottom;
+  background-color:lightyellow;
+}
+md-tab-item span {
+  font-size:1.25em;
+  line-height:0;
+  vertical-align: text-bottom;
+}
+
+.md-button.md-fab, .md-fab-speed-dial .md-fab-actions .md-fab{
+  line-height: 40px;
+  max-height:30px;
+  max-width:30px;
+  min-height: 30px;
+    width: 30px;
+    height: 30px;
+}
+
+ .md-fab-speed-dial .md-fab-actions .md-fab{
+margin-bottom:.5em;
+ }
+
+/*
+  We're using CSS transitions for when
+  the enter and move events are triggered
+  for the element that has the .repeated-item
+  class
+*/
+.repeated-item.ng-enter, .repeated-item.ng-move {
+  -webkit-transition:.5s linear all;
+  -moz-transition:.5s linear all;
+  -o-transition:.5s linear all;
+  transition:.5s linear all;
+  opacity:0;
+}
+
+.repeated-item.ng-enter-stagger, .repeated-item.ng-move-stagger {
+  transition-delay: .1s;
+
+    /* As of 1.4.4, this must always be set: it signals ngAnimate
+    to not accidentally inherit a delay property from another CSS class */
+  transition-duration: 0s;
+}
+
+
+/*
+ The ng-enter-active and ng-move-active
+ are where the transition destination properties
+ are set so that the animation knows what to
+ animate.
+*/
+.repeated-item.ng-enter.ng-enter-active,
+.repeated-item.ng-move.ng-move-active {
+  opacity:1;
+}
+
+/*
+  We're using CSS keyframe animations for when
+  the leave event is triggered for the element
+  that has the .repeated-item class
+
+.repeated-item.ng-leave {
+  -webkit-animation:0.5s my_animation;
+  -moz-animation:0.5s my_animation;
+  -o-animation:0.5s my_animation;
+  animation:0.5s my_animation;
+}*/
+
+@keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+/*
+  Unfortunately each browser vendor requires
+  its own definition of keyframe animation code...
+*/
+@-webkit-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-moz-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}
+
+@-o-keyframes my_animation {
+  from { opacity:1; }
+  to { opacity:0; }
+}

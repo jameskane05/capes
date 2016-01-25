@@ -1,0 +1,200 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en" >
+
+    <head>
+        <title>Capes: Discreet Portfolio Sharing</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.css">
+        <link rel="stylesheet" href="{% static './assets/app.css' %}"/>
+
+        <style type="text/css">
+            /* Hide when Angular is not yet loaded and initialized */
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+              display: none !important;
+            }
+        </style>
+    </head>
+
+    <body ng-app="capes" layout="row" ng-controller="ClientController as cl" ng-cloak >
+
+        <!--SIDENAV -->
+        <!--SIDENAV -->
+        <!--SIDENAV -->
+
+        <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-sm')"
+                    hide-lt-sm>
+            <md-content>
+                <md-tabs md-stretch-tabs="always" md-dynamic-height md-border-bottom md-no-disconnect md-selected="cl.selectedIndex">
+
+                    <md-tab>
+                        <md-tab-label>Clients</md-tab-label>
+                        <md-tab-body class="md-padding">
+                            <div style="height:24px;margin-top:19px;" layout="row" layout-align="end end" class="md-toolbar-tools">
+                                <md-button class="md-icon-button no-svg-pos" aria-label="Add client">
+                                    <md-tooltip >
+                                        Add Client
+                                    </md-tooltip>
+                                    <ng-md-icon icon="add_circle" size="26" style="fill: green;" ng-click="cl.addClientDialog($event)"></ng-md-icon>
+                                </md-button>
+                            </div>
+                            <md-list>
+                                <md-list-item ng-repeat="it in cl.clients" class="repeated-item">
+                                    <md-button ng-click="cl.selectClient(it)" ng-class="{'selected' : it === cl.selected }">
+                                        <md-icon md-svg-icon="{% verbatim %}{{it.avatar}}{% endverbatim %}" class="avatar"></md-icon>
+                                        {% verbatim %}{{it.name}}{% endverbatim %}
+                                    </md-button>
+                                </md-list-item>
+                            </md-list>
+                        </md-tab-body>
+                    </md-tab>
+
+
+                    <md-tab ng-click="$mdBottomSheet.hide()">
+                        <md-tab-label>Work</md-tab-label>
+                        <md-tab-body class="md-padding">
+                            <div style="height:24px;margin-top:19px;" layout="row" layout-align="end end" class="md-toolbar-tools">
+                                <md-button class="md-icon-button no-svg-pos" aria-label="Add client">
+                                    <md-tooltip>
+                                        Add Work
+                                    </md-tooltip>
+                                    <ng-md-icon icon="add_circle" size="26" style="fill: green;" ng-click="cl.addWorkDialog($event)"></ng-md-icon>
+                                </md-button>
+                            </div>
+                            <md-list>
+                                <md-list-item ng-repeat="it in cl.work" class="repeated-item">
+                                    <md-button ng-click="cl.selectWork(it)" ng-class="{'selected' : it === cl.selected_work }">
+                                        <md-icon md-svg-icon="{% verbatim %}{{it.avatar}}{% endverbatim %}" class="avatar"></md-icon>
+                                        {% verbatim %}{{it.name}}{% endverbatim %}
+                                    </md-button>
+                                </md-list-item>
+                            </md-list>
+                        </md-tab-body>
+                    </md-tab>
+
+                </md-tabs>
+            </md-content>
+        </md-sidenav>
+
+
+        <!-- MAIN CONTENT WINDOW -->
+        <!-- MAIN CONTENT WINDOW -->
+        <!-- MAIN CONTENT WINDOW -->
+
+        <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+
+            <md-toolbar layout="row" class="md-whiteframe-z1">
+                <md-button class="menu" hide-gt-sm ng-click="cl.toggleClientList()" aria-label="Show Client List">
+                    <md-icon md-svg-icon="menu"></md-icon>
+                </md-button>
+                <h1>Capes: Discrete Portfolio Sharing</h1>
+            </md-toolbar>
+
+            <md-content flex id="content">
+
+                <!-- CLIENT MODAL -->
+                <!-- CLIENT MODAL -->
+                <!-- CLIENT MODAL -->
+
+                <div ng-hide="cl.selectedIndex == 1">
+                    <md-icon md-svg-icon="{% verbatim %}{{cl.selected.avatar}}{% endverbatim %}" class="avatar"></md-icon>
+                    <h1 style="margin-bottom:0;">{% verbatim %}{{cl.selected.name}}{% endverbatim %}</h1>
+                    <h3 style="margin-top:0;margin-bottom:0;">
+                        <ng-md-icon class="lower" icon="email" style="fill:saddlebrown;"></ng-md-icon>
+                        {% verbatim %}{{cl.selected.email}}{% endverbatim %}</h3>
+                    <h3 style="margin-top:1px; margin-bottom:3px;">
+                        <ng-md-icon class="lower" style="fill:saddlebrown;" icon="link" ></ng-md-icon>
+                        <a href="/work/{% verbatim %}{{cl.selected.link}}{% endverbatim %}" style="text-decoration:none;">
+                            {% verbatim %}{{cl.selected.link}}{% endverbatim %}
+                        </a>
+                    </h3>
+                    <md-content>
+                        <form name="setExpDateForm">
+                            <md-datepicker class="expDateSetter" flex="33" type="datetime-local" md-min-date="cl.minDate" name="new_exp_date" ng-model="cl.selected.new_exp_date" md-placeholder="{% verbatim %}{{cl.selected.exp_date | date:'MM/dd/yyyy'}}{% endverbatim %}"></md-datepicker>
+                            <md-button style="margin-left:2em; margin-top:0; margin-bottom:0; height:18px;" type="submit" name="submit" ng-hide="!setExpDateForm.$dirty" ng-click="cl.setExpDate(cl.selected.new_exp_date);setExpDateForm.$setPristine()">Update</md-button>
+                        </form>
+                    </md-content>
+
+                    <p style="margin-top:1.5em;">{% verbatim %}{{cl.selected.notes}}{% endverbatim %}<br></p>
+
+                    <md-button ng-click="cl.emailClientPanel($event)" aria-label="Send email">Send email</md-button>
+                </div>
+
+                <!-- WORK MODAL -->
+                <!-- WORK MODAL -->
+                <!-- WORK MODAL -->
+
+                <div ng-hide="cl.selectedIndex == 0">
+                    <h1 style="margin-bottom:0;">{% verbatim %}{{cl.selected_work.name}}{% endverbatim %}</h1>
+                    <p style="margin-bottom:1.5em;">
+                        <ng-md-icon class="lower" icon="description" style="fill:saddlebrown;"></ng-md-icon>
+                        {% verbatim %}{{cl.selected_work.notes}}{% endverbatim %}
+                    </p>
+                    <img style="margin-top:1px; margin-bottom:3px;" ng-src="{% verbatim %}{{cl.selected_work.image}}{% endverbatim %}">
+                </div>
+
+            </md-content>
+
+            <!-- SETTINGS FAB -->
+            <!-- SETTINGS FAB -->
+            <!-- SETTINGS FAB -->
+
+            <md-fab-speed-dial md-direction="left" ng-class="md-fling" layout-align="end start" style="margin-bottom:1em;margin-right:.25em;margin-top:.5em;">
+                <md-fab-trigger>
+                    <md-button aria-label="menu" class="md-fab md-warn" style="background-color:saddlebrown; margin-bottom:0em;" size-="24">
+                        <md-tooltip>Settings</md-tooltip>
+                        <ng-md-icon icon="settings" class="setting" size="20" style="fill: white;"></ng-md-icon>
+                    </md-button>
+                </md-fab-trigger>
+                <md-fab-actions>
+                    <md-button aria-label="Logout" class="md-fab md-raised md-mini md-icon-button" href="api-auth/logout/?next=/">
+                        <md-tooltip>Logout</md-tooltip>
+                        <ng-md-icon icon="logout" class="logout" size="20" style="fill: saddlebrown;"></ng-md-icon>
+                    </md-button>
+
+                    <!-- Delete button toggles depending on which tab is open -->
+                    <md-button ng-hide="cl.selectedIndex == 1" aria-label="Delete" class="md-fab md-raised md-mini md-icon-button" ng-click="cl.deleteSelected()">
+                        <md-tooltip>Delete Selected Client</md-tooltip>
+                        <ng-md-icon icon="delete" size="20" style="fill: saddlebrown;"></ng-md-icon>
+                    </md-button>
+                    <md-button ng-hide="cl.selectedIndex == 0" aria-label="Delete" class="md-fab md-raised md-mini md-icon-button" ng-click="cl.deleteSelectedWork()">
+                        <md-tooltip>Delete Selected Work</md-tooltip>
+                        <ng-md-icon icon="delete" size="20" style="fill: saddlebrown;"></ng-md-icon>
+                    </md-button>
+                </md-fab-actions>
+            </md-fab-speed-dial>
+
+        </div>
+
+        <!-- INCLUDES -->
+        <!-- INCLUDES -->
+        <!-- INCLUDES -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0-rc1/angular-material.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-messages.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+        <script src="//cdn.jsdelivr.net/lodash/2.1.0/lodash.compat.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/9.0.9/ng-file-upload.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/9.0.9/ng-file-upload-shim.min.js"></script>
+
+        <script src="{% static './src/clients/Clients.js' %}"></script>
+        <script src="{% static './src/clients/ClientController.js' %}"></script>
+        <script src="{% static './src/capes.js' %}"></script>
+    </body>
+</html>

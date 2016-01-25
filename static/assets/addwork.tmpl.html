@@ -1,0 +1,41 @@
+<md-dialog aria-label="Add client" style="width:80%" ng-cloak>
+
+    <md-toolbar>
+        <div layout="row" layout-align="space-between end" class="md-toolbar-tools">
+            <h2>Add Work</h2>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <ng-md-icon icon="cancel" style="fill:rgba(255, 255, 255, 0.870588);" aria-label="Close dialog"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-padding">
+        <form name="addWorkForm" enctype="multipart/form-data">
+            <md-content layout-padding layout="row" layout-sm="column" style="padding-bottom:4px;">
+                <md-input-container flex>
+                    <label>Project name</label>
+                    <input name="name" ng-model="new_work.name" ng-required="true">
+                </md-input-container>
+                    <md-input-container flex>
+                        <input type="text" ng-model="new_work.tags" placeholder="Enter tags">
+                    </md-input-container>
+                <md-input-container flex>
+                    <button class="md-button md-raised" style="width:120px;display:block;margin: 0 auto;" type="file" ngf-select ngf-multiple name="image" ng-model="new_work.image" accept="image/*" ngf-max-size="2MB" required>Select Image</button>
+                </md-input-container>
+            </md-content>
+            <md-content class="notes" layout-padding layout="row" layout-sm="column">
+                <md-input-container style="padding-top:0;" flex>
+                    <label style="margin-bottom:0;">Project description</label>
+                    <textarea name="notes" ng-model="new_work.notes" columns="2"></textarea>
+                </md-input-container>
+            </md-content>
+
+            <div style="margin-top:1.75em;" layout="row" layout-align="end end" layout-sm="column" style="min-width:88px;">
+                <md-content class="create-row" flex="45" layout="row" layout-align="end">
+                    <md-button type="submit" class="md-raised" ng-click="createWork(new_work)" ng-disabled="addWorkForm.$invalid">Create</md-button>
+                </md-content>
+            </div>
+        </form>
+    </md-dialog-content>
+
+</md-dialog>

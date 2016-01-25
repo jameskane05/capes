@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h2 class="md-title">Dear {{client.name}},</h2>
+    <p>Someone at <a href="http://lelander.com">Lelander</a> wants to share our work with you. We like to be discreet with this kind of thing, so we've created a custom link just for you. Heads up - this link is time-sensitive and will expire on {{ client.exp_date | date:'m/d/Y' }}:</p>
+    <p>http://capes.lelander.com/work/{{client.link}}</p>
+    <p>{{ custom_email_text }}</p>
+    <p>We hope you like what you see. Feel free to email or call with any questions.</p>
+    <p style="margin-bottom:0;">Warm regards,</p>
+    <h3 style="margin-top:0;">The Lelander Team</h3>
+</body>
+</html>

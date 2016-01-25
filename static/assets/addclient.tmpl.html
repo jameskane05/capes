@@ -1,0 +1,63 @@
+<md-dialog aria-label="Add client" style="width:80%" ng-cloak>
+
+    <md-toolbar>
+        <div layout="row" layout-align="space-between end" class="md-toolbar-tools">
+            <h2>Add Client</h2>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <ng-md-icon icon="cancel" style="fill:rgba(255, 255, 255, 0.870588);" aria-label="Close dialog"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-padding">
+        <form name="addClientForm">
+            <md-content layout-padding layout="row" layout-sm="column" layout-md="column" style="padding-bottom:4px;">
+                <md-input-container flex>
+                    <label>Client or company name</label>
+                    <input name="name" ng-init="" ng-model="new_client.name" ng-required="true">
+                    <div ng-messages="addClientForm.name.$touched" role="alert">
+                        <div ng-message-exp="['required']">
+                            This field is required
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Email</label>
+                    <input required type="email" name="email" ng-model="new_client.email" ng-pattern="/^.+@.+\..+$/" ng-required="true" />
+                    <div ng-messages="addClientForm.email.$error" role="alert">
+                        <div ng-message-exp="['pattern']">
+                        A valid email is required
+                        </div>
+                    </div>
+                    </md-input-container>
+            </md-content>
+
+            <md-content class="" layout-padding layout="row" layout-sm="column" layout-md="column">
+                <md-input-container style="padding-top:0;" flex>
+                    <label style="margin-bottom:0;">Notes on the client</label>
+                    <textarea name="notes" ng-model="new_client.notes" columns="2"></textarea>
+                </md-input-container>
+            </md-content>
+
+            <div style="margin-top:1.75em;" layout="row" layout-align="space-around end" layout-sm="column" layout-align-sm="start start">
+                <md-content class="create-row" flex="35" style="min-width:195px;">
+                    <md-datepicker type="datetime-local" md-min-date="minDate" name="exp_date" ng-model="new_client.exp_date" md-placeholder="Expiration date"></md-datepicker><br />
+                    <div ng-messages="addClientForm.exp_date.$error" role="alert">
+                        <div ng-message-exp="['mindate']"></div>
+                    </div>
+                </md-content>
+                <md-input-container style="padding-bottom: 10px;padding-left:15px;min-width:200px;" flex="40">
+                    <label>Optional custom link</label>
+                    <input name="link" ng-model="new_client.link" ng-pattern="/^\w*$/">
+                    <div ng-messages="addClientForm.link.$error" role="alert">
+                        <div ng-message-exp="['pattern']">Please use only letters, numbers and underscores</div>
+                    </div>
+                </md-input-container>
+                <md-content class="create-row" flex="25" flex-sm="45" layout="row" layout-align="end" style="min-width:88px;">
+                    <md-button style="margin-left:15px;" type="submit" class="md-raised create-client" type="submit" ng-click="createClient(new_client)" ng-disabled="addClientForm.$invalid">Create</md-button>
+                </md-content>
+            </div>
+        </form>
+    </md-dialog-content>
+
+</md-dialog>

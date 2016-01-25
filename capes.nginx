@@ -1,0 +1,13 @@
+server {
+    listen 80;
+    server_name capes.lelander.com;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/var/www/site/capes.sock;
+    }
+
+    location /static {
+        root /var/www;
+    }
+}
